@@ -39,7 +39,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -65,7 +65,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "percent",
@@ -151,7 +151,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -238,7 +238,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "percent",
@@ -323,7 +323,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "bytes",
@@ -408,7 +408,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "bytes",
@@ -493,7 +493,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "none",
@@ -578,7 +578,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "none",
@@ -663,7 +663,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "none",
@@ -748,7 +748,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "format": "none",
@@ -830,7 +830,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 3,
       "editable": true,
       "error": false,
@@ -956,7 +956,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1080,7 +1080,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1202,7 +1202,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -1293,7 +1293,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 2,
       "editable": true,
       "error": false,
@@ -1408,9 +1408,26 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": "()",
         "current": {},
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "definition": "label_values(kube_deployment_created, deployment)",
         "hide": 0,
         "includeAll": true,
@@ -1432,7 +1449,7 @@
       {
         "allValue": "()",
         "current": {},
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "definition": "label_values(kube_statefulset_created, statefulset)",
         "hide": 0,
         "includeAll": true,
@@ -1454,7 +1471,7 @@
       {
         "allValue": "()",
         "current": {},
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "definition": "label_values(kube_daemonset_created, daemonset)",
         "hide": 0,
         "includeAll": true,
