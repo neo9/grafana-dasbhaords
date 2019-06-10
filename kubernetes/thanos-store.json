@@ -1,14 +1,6 @@
 {
   "__inputs": [
     {
-      "name": "datasource",
-      "label": "Thanos",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    },
-    {
       "name": "VAR_LABELSELECTOR",
       "type": "constant",
       "label": "labelselector",
