@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "datasource",
+      "name": "DS_THANOS",
       "label": "Thanos",
       "description": "",
       "type": "datasource",
@@ -66,7 +66,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1560182201270,
+  "iteration": 1560183015478,
   "links": [],
   "panels": [
     {
@@ -88,7 +88,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -183,7 +183,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -278,7 +278,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -380,7 +380,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -468,7 +468,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -554,7 +554,7 @@
     },
     {
       "columns": [],
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
@@ -654,7 +654,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -699,6 +699,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Memory Used",
       "tooltip": {
@@ -732,14 +733,18 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -782,6 +787,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Goroutines",
       "tooltip": {
@@ -814,14 +820,18 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${datasource}",
+      "datasource": "$datasource",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -868,6 +878,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "GC Time Quantiles",
       "tooltip": {
@@ -901,7 +912,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": "30s",
@@ -915,8 +930,9 @@
     "list": [
       {
         "current": {
-          "text": "Prometheus",
-          "value": "Prometheus"
+          "tags": [],
+          "text": "Thanos",
+          "value": "Thanos"
         },
         "hide": 0,
         "includeAll": false,
@@ -1001,7 +1017,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${datasource}",
+        "datasource": "${DS_THANOS}",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -1089,6 +1105,6 @@
   },
   "timezone": "browser",
   "title": "Thanos Query",
-  "uid": "opwl5gSiz",
+  "uid": "opwl5gSii",
   "version": 1
 }
