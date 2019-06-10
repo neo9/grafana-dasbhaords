@@ -39,7 +39,7 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -67,7 +67,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -159,7 +159,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 0,
       "fill": 5,
       "gridPos": {
@@ -252,7 +252,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 0,
       "fill": 4,
       "gridPos": {
@@ -374,7 +374,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 0,
       "fill": 4,
       "gridPos": {
@@ -494,7 +494,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 0,
       "fill": 4,
       "gridPos": {
@@ -643,7 +643,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "decimals": 0,
       "fill": 4,
       "gridPos": {
@@ -735,7 +735,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -834,7 +834,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_THANOS}",
+      "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -940,9 +940,26 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "Thanos",
+          "value": "Thanos"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "definition": "",
         "hide": 0,
         "includeAll": false,
@@ -964,7 +981,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_THANOS}",
+        "datasource": "$datasource",
         "definition": "",
         "hide": 0,
         "includeAll": true,
@@ -1016,6 +1033,6 @@
   },
   "timezone": "browser",
   "title": "RabbitMQ Metrics - Single",
-  "uid": "sQ6KBaSiz",
+  "uid": "sQ6KBaSis",
   "version": 1
 }
