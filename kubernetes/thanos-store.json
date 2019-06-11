@@ -1,18 +1,12 @@
 {
   "__inputs": [
     {
-      "name": "VAR_LABELSELECTOR",
-      "type": "constant",
-      "label": "labelselector",
-      "value": "job",
-      "description": ""
-    },
-    {
-      "name": "VAR_LABELVALUE",
-      "type": "constant",
-      "label": "labelvalue",
-      "value": "thanos-store",
-      "description": ""
+      "name": "datastore",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
     }
   ],
   "__requires": [
@@ -20,19 +14,19 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.2.0"
+      "version": "5.0.3"
     },
     {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
-      "version": ""
+      "version": "5.0.0"
     },
     {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
-      "version": "1.0.0"
+      "version": "5.0.0"
     }
   ],
   "annotations": {
@@ -52,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1560182262406,
+  "iteration": 1529906350696,
   "links": [],
   "panels": [
     {
@@ -74,7 +68,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -104,7 +98,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -115,16 +108,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(grpc_server_handled_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (grpc_code, grpc_method, kubernetes_namespace)",
+          "expr": "sum(rate(grpc_server_handled_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (grpc_code, grpc_method, instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{grpc_code}} {{grpc_method}}  {{kubernetes_namespace}}",
+          "legendFormat": "{{grpc_code}} {{grpc_method}}  {{instance}}",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Query RPS [$interval]",
       "tooltip": {
@@ -158,18 +150,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -199,7 +187,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -210,16 +197,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(grpc_server_handling_seconds_bucket{$labelselector=\"$labelvalue\"}[$interval])) by (grpc_method, le, kubernetes_namespace))",
+          "expr": "histogram_quantile(0.9999, sum(rate(grpc_server_handling_seconds_bucket{job=\"thanos-store\"}[$interval])) by (grpc_method, le, instance))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{grpc_method}} {{kubernetes_namespace}}",
+          "legendFormat": "{{grpc_method}} {{instance}}",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Response Time 99.99 Quantile [$interval]",
       "tooltip": {
@@ -253,18 +239,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -294,7 +276,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -305,16 +286,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_sent_chunk_size_bytes_bucket{$labelselector=\"$labelvalue\"}[$interval])) by (le, kubernetes_namespace))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_sent_chunk_size_bytes_bucket{job=\"thanos-store\"}[$interval])) by (le, instance))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{kubernetes_namespace}}",
+          "legendFormat": "{{instance}}",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Response Size 99.99 Quantile [$interval]",
       "tooltip": {
@@ -348,18 +328,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -389,7 +365,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -400,30 +375,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operations_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace, operation)",
+          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance, operation)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "bucket {{operation}} {{kubernetes_namespace}}",
+          "legendFormat": "bucket {{operation}} {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_drops_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace)",
+          "expr": "sum(rate(thanos_bucket_store_block_drops_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "block drops {{kubernetes_namespace}}",
+          "legendFormat": "block drops {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_loads_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace)",
+          "expr": "sum(rate(thanos_bucket_store_block_loads_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "block loads {{kubernetes_namespace}}",
+          "legendFormat": "block loads {{instance}}",
           "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Operations/s [$interval]",
       "tooltip": {
@@ -457,18 +431,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -498,7 +468,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -509,30 +478,29 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (operation,kubernetes_namespace)",
+          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (operation,instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "bucket {{operation}} {{kubernetes_namespace}}",
+          "legendFormat": "bucket {{operation}} {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_drop_failures_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace)",
+          "expr": "sum(rate(thanos_bucket_store_block_drop_failures_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "block drop {{kubernetes_namespace}}",
+          "legendFormat": "block drop {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_load_failures_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace)",
+          "expr": "sum(rate(thanos_bucket_store_block_load_failures_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "block load {{kubernetes_namespace}}",
+          "legendFormat": "block load {{instance}}",
           "refId": "C"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Operation Failures/s [$interval]",
       "tooltip": {
@@ -566,18 +534,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -607,7 +571,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -618,31 +581,30 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace,le, operation))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,le, operation))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
-          "legendFormat": "99.99 bucket {{operation}} {{kubernetes_namespace}}",
+          "legendFormat": "99.99 bucket {{operation}} {{instance}}",
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_get_all_duration_seconds_bucket{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_get_all_duration_seconds_bucket{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "99.99 get all {{kubernetes_namespace}}",
+          "legendFormat": "99.99 get all {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_merge_duration_seconds_bucket{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_merge_duration_seconds_bucket{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "99.99 merge {{kubernetes_namespace}}",
+          "legendFormat": "99.99 merge {{instance}}",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Operation Time Quantile [$interval]",
       "tooltip": {
@@ -676,18 +638,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -716,7 +674,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -727,37 +684,36 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_store_index_cache_items_added_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace,item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_items_added_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "added {{item_type}} {{kubernetes_namespace}}",
+          "legendFormat": "added {{item_type}} {{instance}}",
           "refId": "D"
         },
         {
-          "expr": "sum(rate(thanos_store_index_cache_items_evicted_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace,item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_items_evicted_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "evicted {{item_type}} {{kubernetes_namespace}}",
+          "legendFormat": "evicted {{item_type}} {{instance}}",
           "refId": "E"
         },
         {
-          "expr": "sum(rate(thanos_store_index_cache_requests_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace,item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_requests_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "requests {{item_type}} {{kubernetes_namespace}}",
+          "legendFormat": "requests {{item_type}} {{instance}}",
           "refId": "F"
         },
         {
-          "expr": "sum(rate(thanos_store_index_cache_hits_total{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}[$interval])) by (kubernetes_namespace, item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_hits_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance, item_type)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "hits {{item_type}} {{kubernetes_namespace}}",
+          "legendFormat": "hits {{item_type}} {{instance}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Cache Ops/s [$interval]",
       "tooltip": {
@@ -791,18 +747,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -832,7 +784,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -843,25 +794,25 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "thanos_bucket_store_series_blocks_queried{$labelselector=\"$labelvalue\",quantile=\"0.99\",kubernetes_namespace=~\"$namespace\"}",
+          "expr": "thanos_bucket_store_series_blocks_queried{job=\"thanos-store\",quantile=\"0.99\",instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
-          "legendFormat": "blocks queried {{kubernetes_pod_name}} {{kubernetes_namespace}}",
+          "legendFormat": "blocks queried {{instance}} {{instance}}",
           "refId": "C"
         },
         {
-          "expr": "thanos_bucket_store_series_data_fetched{$labelselector=\"$labelvalue\",quantile=\"0.99\",kubernetes_namespace=~\"$namespace\"}",
+          "expr": "thanos_bucket_store_series_data_fetched{job=\"thanos-store\",quantile=\"0.99\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "data fetched {{kubernetes_pod_name}} {{kubernetes_namespace}}",
+          "legendFormat": "data fetched {{instance}} {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "thanos_bucket_store_series_result_series{$labelselector=\"$labelvalue\",quantile=\"0.99\",kubernetes_namespace=~\"$namespace\"}",
+          "expr": "thanos_bucket_store_series_result_series{job=\"thanos-store\",quantile=\"0.99\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "result series {{kubernetes_pod_name}} {{kubernetes_namespace}}",
+          "legendFormat": "result series {{instance}} {{instance}}",
           "refId": "D"
         }
       ],
@@ -921,7 +872,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -945,7 +896,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -956,10 +906,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_heap_alloc_bytes{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=\"thanos-store\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{kubernetes_namespace}} {{kubernetes_pod_name}}",
+          "legendFormat": "{{instance}} {{instance}}",
           "refId": "A",
           "step": 2
         }
@@ -1006,7 +956,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -1028,7 +978,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1039,10 +988,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{$labelselector=\"$labelvalue\",kubernetes_namespace=~\"$namespace\"}",
+          "expr": "go_goroutines{job=\"thanos-store\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{kubernetes_namespace}} {{kubernetes_pod_name}}",
+          "legendFormat": "{{instance}} {{instance}}",
           "refId": "A",
           "step": 2
         }
@@ -1088,7 +1037,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datastore}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -1112,7 +1061,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1123,10 +1071,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds{$labelselector=\"$labelvalue\", quantile=\"1\"}",
+          "expr": "go_gc_duration_seconds{job=\"thanos-store\", quantile=\"1\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{kubernetes_namespace}} {{kubernetes_pod_name}} ",
+          "legendFormat": "{{instance}} {{instance}} ",
           "refId": "A",
           "step": 2
         }
@@ -1171,7 +1119,7 @@
   ],
   "refresh": "30s",
   "revision": null,
-  "schemaVersion": 18,
+  "schemaVersion": 16,
   "style": "dark",
   "tags": [
     "thanos"
@@ -1180,14 +1128,14 @@
     "list": [
       {
         "current": {
-          "text": "Prometheus",
-          "value": "Prometheus"
+          "text": "Thanos",
+          "value": "Thanos"
         },
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "datasource",
+        "name": "datastore",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
@@ -1260,66 +1208,27 @@
         ],
         "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       },
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "$datasource",
-        "definition": "",
+        "datasource": "${datastore}",
         "hide": 0,
         "includeAll": true,
-        "label": "namespace",
+        "label": "instance",
         "multi": false,
-        "name": "namespace",
+        "name": "instance",
         "options": [],
-        "query": "label_values(kubernetes_namespace)",
+        "query": "label_values(grpc_server_handled_total{job=\"thanos-store\"}, instance)",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
-      },
-      {
-        "current": {
-          "value": "${VAR_LABELSELECTOR}",
-          "text": "${VAR_LABELSELECTOR}"
-        },
-        "hide": 2,
-        "label": null,
-        "name": "labelselector",
-        "options": [
-          {
-            "value": "${VAR_LABELSELECTOR}",
-            "text": "${VAR_LABELSELECTOR}"
-          }
-        ],
-        "query": "${VAR_LABELSELECTOR}",
-        "skipUrlSync": false,
-        "type": "constant"
-      },
-      {
-        "current": {
-          "value": "${VAR_LABELVALUE}",
-          "text": "${VAR_LABELVALUE}"
-        },
-        "hide": 2,
-        "label": null,
-        "name": "labelvalue",
-        "options": [
-          {
-            "value": "${VAR_LABELVALUE}",
-            "text": "${VAR_LABELVALUE}"
-          }
-        ],
-        "query": "${VAR_LABELVALUE}",
-        "skipUrlSync": false,
-        "type": "constant"
       }
     ]
   },
@@ -1355,5 +1264,5 @@
   "timezone": "browser",
   "title": "Thanos Store",
   "uid": "KqPVKRIiz",
-  "version": 1
+  "version": 2
 }

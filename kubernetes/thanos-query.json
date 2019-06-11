@@ -2,25 +2,11 @@
   "__inputs": [
     {
       "name": "datasource",
-      "label": "Thanos",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
-    },
-    {
-      "name": "VAR_LABELVALUE",
-      "type": "constant",
-      "label": "labelvalue",
-      "value": "thanos-query",
-      "description": ""
-    },
-    {
-      "name": "VAR_LABELSELECTOR",
-      "type": "constant",
-      "label": "labelselector",
-      "value": "job",
-      "description": ""
     }
   ],
   "__requires": [
@@ -28,25 +14,25 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "6.2.0"
+      "version": "5.0.3"
     },
     {
       "type": "panel",
       "id": "graph",
       "name": "Graph",
-      "version": ""
+      "version": "5.0.0"
     },
     {
       "type": "datasource",
       "id": "prometheus",
       "name": "Prometheus",
-      "version": "1.0.0"
+      "version": "5.0.0"
     },
     {
       "type": "panel",
       "id": "table",
       "name": "Table",
-      "version": ""
+      "version": "5.0.0"
     }
   ],
   "annotations": {
@@ -66,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1560183015478,
+  "iteration": 1529906270695,
   "links": [],
   "panels": [
     {
@@ -88,7 +74,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -118,7 +104,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null as zero",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -129,16 +114,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(grpc_client_handled_total{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}[$interval])) by (kubernetes_pod_name, grpc_code, grpc_method)",
+          "expr": "sum(rate(grpc_client_handled_total{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (instance, grpc_code, grpc_method)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{grpc_code}} {{grpc_method}} {{kubernetes_pod_name}}",
+          "legendFormat": "{{grpc_code}} {{grpc_method}} {{instance}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Request RPS",
       "tooltip": {
@@ -172,18 +156,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -213,7 +193,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -224,16 +203,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(grpc_client_handling_seconds_bucket{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}[$interval])) by (grpc_method,kubernetes_pod_name, le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(grpc_client_handling_seconds_bucket{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (grpc_method,instance, le))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "99.99 {{grpc_method}} {{kubernetes_pod_name}}",
+          "legendFormat": "99.99 {{grpc_method}} {{instance}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Response Time Quantile [$interval]",
       "tooltip": {
@@ -267,18 +245,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -308,7 +282,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -319,23 +292,22 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_instant_query_duration_seconds_bucket{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}[$interval])) by (kubernetes_pod_name, le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_instant_query_duration_seconds_bucket{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (instance, le))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "instant_query {{kubernetes_pod_name}}",
+          "legendFormat": "instant_query {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_range_query_duration_seconds_bucket{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}[$interval])) by (kubernetes_pod_name, le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_range_query_duration_seconds_bucket{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (instance, le))",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "range_query {{kubernetes_pod_name}}",
+          "legendFormat": "range_query {{instance}}",
           "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Thanos Query 99.99 Quantile [$interval]",
       "tooltip": {
@@ -369,18 +341,14 @@
           "min": "0",
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -404,7 +372,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -415,16 +382,15 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "prometheus_engine_query_duration_seconds{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\",quantile=\"0.99\"}",
+          "expr": "prometheus_engine_query_duration_seconds{job=\"thanos-query\",instance=~\"$instance\",quantile=\"0.99\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{kubernetes_pod_name}} {{slice}}",
+          "legendFormat": "{{instance}} {{slice}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Prometheus Query 99 Quantile",
       "tooltip": {
@@ -457,18 +423,14 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -492,7 +454,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -503,17 +464,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "prometheus_engine_queries{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}",
+          "expr": "prometheus_engine_queries{job=\"thanos-query\",instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "{{kubernetes_pod_name}}",
+          "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Prometheus Queries/s",
       "tooltip": {
@@ -546,15 +506,11 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "columns": [],
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "fontSize": "100%",
       "gridPos": {
         "h": 9,
@@ -565,7 +521,6 @@
       "hideTimeOverride": false,
       "id": 34,
       "links": [],
-      "options": {},
       "pageSize": null,
       "scroll": false,
       "showHeader": true,
@@ -621,7 +576,7 @@
       ],
       "targets": [
         {
-          "expr": "min(thanos_store_node_info{$labelselector=\"$labelvalue\"}) by (external_labels)",
+          "expr": "min(thanos_store_node_info{job=\"thanos-query\"}) by (external_labels)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -654,7 +609,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -678,7 +633,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -689,17 +643,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_heap_alloc_bytes{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=\"thanos-query\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{kubernetes_pod_name}}",
+          "legendFormat": "{{instance}}",
           "refId": "A",
           "step": 2
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Memory Used",
       "tooltip": {
@@ -733,18 +686,14 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "fill": 1,
       "gridPos": {
         "h": 7,
@@ -766,7 +715,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -777,17 +725,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{$labelselector=\"$labelvalue\"}",
+          "expr": "go_goroutines{job=\"thanos-query\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{kubernetes_pod_name}}",
+          "legendFormat": "{{instance}}",
           "refId": "A",
           "step": 2
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Goroutines",
       "tooltip": {
@@ -820,18 +767,14 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "$datasource",
+      "datasource": "${datasource}",
       "editable": true,
       "error": false,
       "fill": 1,
@@ -857,7 +800,6 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
-      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -868,17 +810,16 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds{$labelselector=\"$labelvalue\",kubernetes_pod_name=~\"$pod\"}",
+          "expr": "go_gc_duration_seconds{job=\"thanos-query\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{quantile}} {{kubernetes_pod_name}}",
+          "legendFormat": "{{quantile}} {{instance}}",
           "refId": "A",
           "step": 2
         }
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "GC Time Quantiles",
       "tooltip": {
@@ -912,16 +853,12 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     }
   ],
   "refresh": "30s",
   "revision": null,
-  "schemaVersion": 18,
+  "schemaVersion": 16,
   "style": "dark",
   "tags": [
     "thanos"
@@ -930,7 +867,6 @@
     "list": [
       {
         "current": {
-          "tags": [],
           "text": "Thanos",
           "value": "Thanos"
         },
@@ -1011,66 +947,27 @@
         ],
         "query": "1m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
         "refresh": 2,
-        "skipUrlSync": false,
         "type": "interval"
       },
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "$datasource",
-        "definition": "",
+        "datasource": "${datasource}",
         "hide": 0,
         "includeAll": true,
-        "label": "pod",
+        "label": "instance",
         "multi": false,
-        "name": "pod",
+        "name": "instance",
         "options": [],
-        "query": "label_values(thanos_build_info{$labelselector=\"$labelvalue\"}, kubernetes_pod_name)",
+        "query": "label_values(thanos_build_info{job=\"thanos-query\"}, instance)",
         "refresh": 1,
         "regex": "",
-        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
-      },
-      {
-        "current": {
-          "value": "${VAR_LABELVALUE}",
-          "text": "${VAR_LABELVALUE}"
-        },
-        "hide": 2,
-        "label": null,
-        "name": "labelvalue",
-        "options": [
-          {
-            "value": "${VAR_LABELVALUE}",
-            "text": "${VAR_LABELVALUE}"
-          }
-        ],
-        "query": "${VAR_LABELVALUE}",
-        "skipUrlSync": false,
-        "type": "constant"
-      },
-      {
-        "current": {
-          "value": "${VAR_LABELSELECTOR}",
-          "text": "${VAR_LABELSELECTOR}"
-        },
-        "hide": 2,
-        "label": null,
-        "name": "labelselector",
-        "options": [
-          {
-            "value": "${VAR_LABELSELECTOR}",
-            "text": "${VAR_LABELSELECTOR}"
-          }
-        ],
-        "query": "${VAR_LABELSELECTOR}",
-        "skipUrlSync": false,
-        "type": "constant"
       }
     ]
   },
@@ -1105,6 +1002,6 @@
   },
   "timezone": "browser",
   "title": "Thanos Query",
-  "uid": "opwl5gSii",
-  "version": 1
+  "uid": "opwl5gSiz",
+  "version": 2
 }
