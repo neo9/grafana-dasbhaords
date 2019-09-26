@@ -443,7 +443,7 @@
           "refId": "B"
         },
         {
-          "expr": "sum(container_memory_usage_bytes{namespace=~\"$namespace\", pod_name=\"$pod\"}) by (pod_name)",
+          "expr": "sum(container_memory_usage_bytes{namespace=~\"$namespace\", pod_name=\"$pod\", container_name=\"$service\"}) by (pod_name)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Pod memory usage {{pod_name}}",
