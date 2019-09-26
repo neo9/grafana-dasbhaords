@@ -1,31 +1,4 @@
 {
-  "__inputs": [],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "6.2.0"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -43,8 +16,7 @@
   "editable": true,
   "gnetId": 6756,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1569498382450,
+  "iteration": 1569508343272,
   "links": [],
   "panels": [
     {
@@ -331,99 +303,6 @@
       "valueName": "current"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "$datasource",
-      "fill": 1,
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "id": 66,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "process_files_open_files{service=\"$service\", pod=\"$pod\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Open Files",
-          "refId": "A"
-        },
-        {
-          "expr": "process_files_max_files{service=\"$service\", pod=\"$pod\"}",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Max Files",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Process Open Files",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "locale",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
       "cacheTimeout": null,
       "colorBackground": false,
       "colorValue": true,
@@ -516,12 +395,120 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Thanos",
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 102,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": true,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum (jvm_memory_used_bytes{service=\"$service\", area=\"heap\", namespace=~\"$namespace\", pod=\"$pod\"}) by (pod)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "JVM memory used {{ pod }}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (pod) (jvm_memory_max_bytes{service=\"$service\", area=\"heap\", namespace=~\"$namespace\", pod=\"$pod\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "JVM max memory used {{ pod }}",
+          "refId": "B"
+        },
+        {
+          "expr": "sum(container_memory_usage_bytes{namespace=~\"$namespace\", pod_name=\"$pod\"}) by (pod_name)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Pod memory usage {{pod_name}}",
+          "refId": "C"
+        },
+        {
+          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{namespace=~\"$namespace\", pod=\"$pod\"}) by (pod)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Pod memory limit {{pod}}",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory usage",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 12,
-        "x": 0,
+        "x": 12,
         "y": 7
       },
       "id": 95,
@@ -613,10 +600,103 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 7,
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 66,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "process_files_open_files{service=\"$service\", pod=\"$pod\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Open Files",
+          "refId": "A"
+        },
+        {
+          "expr": "process_files_max_files{service=\"$service\", pod=\"$pod\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Max Files",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Process Open Files",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "locale",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 7
+        "y": 15
       },
       "id": 96,
       "legend": {
@@ -705,7 +785,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 23
       },
       "id": 18,
       "panels": [],
@@ -723,7 +803,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 24
       },
       "id": 4,
       "legend": {
@@ -812,7 +892,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 31
       },
       "id": 2,
       "legend": {
@@ -895,7 +975,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 29
+        "y": 38
       },
       "id": 22,
       "panels": [
@@ -1351,7 +1431,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 30
+        "y": 39
       },
       "id": 48,
       "panels": [
@@ -2588,7 +2668,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 40
       },
       "id": 72,
       "panels": [
@@ -2780,7 +2860,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 41
       },
       "id": 8,
       "panels": [
@@ -3259,7 +3339,11 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "tags": [],
+          "text": "integration",
+          "value": "integration"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_classes_loaded_classes, namespace)",
         "hide": 0,
@@ -3281,7 +3365,11 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "tags": [],
+          "text": "aon-axa-mrh-api",
+          "value": "aon-axa-mrh-api"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\"}, service)",
         "hide": 0,
@@ -3303,7 +3391,11 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "tags": [],
+          "text": "aon-axa-mrh-api-b55bbbcc8-9g4d2",
+          "value": "aon-axa-mrh-api-b55bbbcc8-9g4d2"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\", service=\"$service\"}, pod)",
         "hide": 0,
@@ -3325,7 +3417,10 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_memory_used_bytes{service=\"$service\", pod=\"$pod\", area=\"heap\"},id)",
         "hide": 0,
@@ -3347,7 +3442,10 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_memory_used_bytes{service=\"$service\", pod=\"$pod\", area=\"nonheap\"},id)",
         "hide": 0,
@@ -3370,7 +3468,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
