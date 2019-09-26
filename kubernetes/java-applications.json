@@ -1,4 +1,31 @@
 {
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "6.2.0"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -16,7 +43,8 @@
   "editable": true,
   "gnetId": 6756,
   "graphTooltip": 0,
-  "iteration": 1569493458646,
+  "id": null,
+  "iteration": 1569498382450,
   "links": [],
   "panels": [
     {
@@ -3231,20 +3259,38 @@
       },
       {
         "allValue": null,
-        "current": {
-          "isNone": true,
-          "text": "None",
-          "value": ""
-        },
+        "current": {},
         "datasource": "$datasource",
-        "definition": "label_values(jvm_classes_loaded_classes, service)",
+        "definition": "label_values(jvm_classes_loaded_classes, namespace)",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(jvm_classes_loaded_classes, namespace)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "$datasource",
+        "definition": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\"}, service)",
         "hide": 0,
         "includeAll": false,
         "label": "service",
         "multi": false,
         "name": "service",
         "options": [],
-        "query": "label_values(jvm_classes_loaded_classes, service)",
+        "query": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\"}, service)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -3257,20 +3303,16 @@
       },
       {
         "allValue": null,
-        "current": {
-          "isNone": true,
-          "text": "None",
-          "value": ""
-        },
+        "current": {},
         "datasource": "$datasource",
-        "definition": "label_values(jvm_classes_loaded_classes, pod)",
+        "definition": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\", service=\"$service\"}, pod)",
         "hide": 0,
         "includeAll": false,
         "label": "pod",
         "multi": false,
         "name": "pod",
         "options": [],
-        "query": "label_values(jvm_classes_loaded_classes, pod)",
+        "query": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\", service=\"$service\"}, pod)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
