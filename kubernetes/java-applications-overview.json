@@ -1,31 +1,4 @@
 {
-  "__inputs": [],
-  "__requires": [
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "6.2.0"
-    },
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    },
-    {
-      "type": "panel",
-      "id": "singlestat",
-      "name": "Singlestat",
-      "version": ""
-    }
-  ],
   "annotations": {
     "list": [
       {
@@ -43,8 +16,7 @@
   "editable": true,
   "gnetId": 6756,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1569500393132,
+  "iteration": 1569502342653,
   "links": [],
   "panels": [
     {
@@ -610,10 +582,105 @@
       "datasource": "$datasource",
       "fill": 1,
       "gridPos": {
-        "h": 7,
+        "h": 10,
         "w": 24,
         "x": 0,
         "y": 14
+      },
+      "id": 97,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum by (pod) (jvm_memory_used_bytes{service=\"$service\", area=\"heap\", namespace=\"$namespace\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "JVM memory {{pod}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (pod) (jvm_memory_max_bytes{service=\"$service\", area=\"heap\", namespace=\"$namespace\"})",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "Max JVM memory {{pod}}",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "JVM heap usage",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "$datasource",
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 24
       },
       "id": 4,
       "legend": {
@@ -702,7 +769,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 31
       },
       "id": 2,
       "legend": {
@@ -785,7 +852,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 38
       },
       "id": 8,
       "panels": [],
@@ -803,7 +870,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 29
+        "y": 39
       },
       "id": 6,
       "legend": {
@@ -893,7 +960,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 29
+        "y": 39
       },
       "id": 10,
       "legend": {
@@ -983,7 +1050,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 38
+        "y": 48
       },
       "id": 14,
       "legend": {
@@ -1072,7 +1139,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 38
+        "y": 48
       },
       "id": 16,
       "legend": {
@@ -1161,7 +1228,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 38
+        "y": 48
       },
       "id": 20,
       "legend": {
@@ -1248,6 +1315,7 @@
     "list": [
       {
         "current": {
+          "selected": true,
           "text": "Thanos",
           "value": "Thanos"
         },
@@ -1265,7 +1333,12 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "selected": false,
+          "tags": [],
+          "text": "integration",
+          "value": "integration"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_classes_loaded_classes, namespace)",
         "hide": 0,
@@ -1287,7 +1360,10 @@
       },
       {
         "allValue": null,
-        "current": {},
+        "current": {
+          "text": "aon-com-api",
+          "value": "aon-com-api"
+        },
         "datasource": "$datasource",
         "definition": "label_values(jvm_classes_loaded_classes{namespace=~\"$namespace\"}, service)",
         "hide": 0,
@@ -1310,7 +1386,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1339,7 +1415,7 @@
     ]
   },
   "timezone": "",
-  "title": "Java applications overview",
+  "title": "Java application overview",
   "uid": "3-IeIwpWa",
-  "version": 3
+  "version": 1
 }
