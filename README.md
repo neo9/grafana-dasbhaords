@@ -1,2 +1,2 @@
-# grafana-dasbhaords
+# grafana-dashboards
 Set of Grafana dashboards
