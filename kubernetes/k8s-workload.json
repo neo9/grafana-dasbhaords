@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 8588,
   "graphTooltip": 0,
-  "iteration": 1573550674539,
+  "iteration": 1573550674547,
   "links": [],
   "panels": [
     {
@@ -1403,6 +1403,32 @@
         "type": "datasource"
       },
       {
+        "allValue": ".*",
+        "current": {
+          "tags": [],
+          "text": "monitoring",
+          "value": "monitoring"
+        },
+        "datasource": "$datasource",
+        "definition": "label_values(kube_daemonset_created, namespace)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "namespace",
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(kube_daemonset_created, namespace)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
         "allValue": "()",
         "current": {
           "text": "All",
@@ -1467,32 +1493,6 @@
         "name": "Daemonset",
         "options": [],
         "query": "label_values(kube_daemonset_created, daemonset)",
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "tags": [],
-          "text": "All",
-          "value": "$__all"
-        },
-        "datasource": "$datasource",
-        "definition": "label_values(kube_daemonset_created, namespace)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "namespace",
-        "multi": false,
-        "name": "namespace",
-        "options": [],
-        "query": "label_values(kube_daemonset_created, namespace)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
