@@ -2053,7 +2053,7 @@
           "text": "gitlab",
           "value": "gitlab"
         },
-        "datasource": "Thanos",
+        "datasource": "$datasource",
         "definition": "",
         "hide": 0,
         "includeAll": false,
@@ -2078,7 +2078,7 @@
           "text": "gitlabhq_production",
           "value": "gitlabhq_production"
         },
-        "datasource": "Thanos",
+        "datasource": "$datasource",
         "definition": "",
         "hide": 0,
         "includeAll": false,
