@@ -16,7 +16,6 @@
   "editable": true,
   "gnetId": 5774,
   "graphTooltip": 0,
-  "id": 25,
   "links": [
     {
       "icon": "external link",
@@ -37,7 +36,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -119,7 +118,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -201,7 +200,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -283,7 +282,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -365,7 +364,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -447,7 +446,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -529,7 +528,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "decimals": 1,
       "format": "percentunit",
       "gauge": {
@@ -615,7 +614,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -707,7 +706,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Thanos",
+      "datasource": "$datasource",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -816,13 +815,31 @@
     }
   ],
   "refresh": "5m",
-  "schemaVersion": 19,
+  "schemaVersion": 20,
   "style": "dark",
   "tags": [
     "GitLab"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
   },
   "time": {
     "from": "now-3h",
@@ -856,5 +873,5 @@
   "timezone": "",
   "title": "GitLab Omnibus",
   "uid": "fcviBMtZk",
-  "version": 8
+  "version": 1
 }
