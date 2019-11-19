@@ -16,11 +16,12 @@
   "editable": true,
   "gnetId": 9964,
   "graphTooltip": 0,
-  "id": 25,
-  "iteration": 1569243080276,
+  "id": 13,
+  "iteration": 1574155687893,
   "links": [],
   "panels": [
     {
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -901,7 +902,8 @@
       "valueName": "current"
     },
     {
-      "collapsed": true,
+      "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1181,6 +1183,7 @@
     },
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1712,15 +1715,15 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 19,
+  "schemaVersion": 20,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "text": "Thanos",
-          "value": "Thanos"
+          "text": "Prometheus",
+          "value": "Prometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -1786,5 +1789,5 @@
   "timezone": "browser",
   "title": "Jenkins monitoring",
   "uid": "GrOR8MpZz",
-  "version": 5
+  "version": 1
 }
