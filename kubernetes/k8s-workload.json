@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 8588,
   "graphTooltip": 0,
-  "iteration": 1573550674547,
+  "iteration": 1576504076994,
   "links": [],
   "panels": [
     {
@@ -289,7 +289,7 @@
       "datasource": "$datasource",
       "editable": true,
       "error": false,
-      "format": "bytes",
+      "format": "decbytes",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -374,7 +374,7 @@
       "datasource": "$datasource",
       "editable": true,
       "error": false,
-      "format": "bytes",
+      "format": "decbytes",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -1021,7 +1021,7 @@
       },
       "yaxes": [
         {
-          "format": "bytes",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1029,7 +1029,7 @@
           "show": true
         },
         {
-          "format": "bytes",
+          "format": "decbytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1405,7 +1405,6 @@
       {
         "allValue": ".*",
         "current": {
-          "tags": [],
           "text": "monitoring",
           "value": "monitoring"
         },
