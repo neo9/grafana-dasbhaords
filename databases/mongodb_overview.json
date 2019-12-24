@@ -16,10 +16,332 @@
   "editable": true,
   "gnetId": 5270,
   "graphTooltip": 1,
-  "id": 31,
-  "iteration": 1573660577222,
+  "id": 20,
+  "iteration": 1576676165413,
   "links": [],
   "panels": [
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "Prometheus",
+      "format": "bytes",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 66,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "pluginVersion": "6.4.2",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Max cache size",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "id": 72,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [
+              {
+                "id": 0,
+                "op": "=",
+                "text": "N/A",
+                "type": 1,
+                "value": "null"
+              }
+            ],
+            "max": 100,
+            "min": 0,
+            "nullValueMode": "connected",
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 60
+              },
+              {
+                "color": "dark-red",
+                "value": 80
+              }
+            ],
+            "unit": "percent"
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.4.2",
+      "targets": [
+        {
+          "expr": "sum(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}) * 2  / sum(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"}) * 1000",
+          "instant": true,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Percentage cache used",
+      "type": "gauge"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "cacheTimeout": null,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 8,
+        "y": 0
+      },
+      "id": 68,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pluginVersion": "6.4.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "mongodb_mongod_wiredtiger_cache_bytes_total{instance=\"$host\"}",
+          "legendFormat": "{{ type }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "cache read / write",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "Prometheus",
+      "format": "bytes",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
+      "id": 70,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "pluginVersion": "6.4.2",
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false,
+        "ymax": null,
+        "ymin": null
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Current cache size",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "total"
+    },
     {
       "aliasColors": {},
       "bars": false,
@@ -44,7 +366,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 15,
       "legend": {
@@ -176,7 +498,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 7
+        "y": 15
       },
       "height": "250px",
       "id": 38,
@@ -288,7 +610,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 7
+        "y": 15
       },
       "height": "250px",
       "id": 25,
@@ -403,7 +725,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 14
+        "y": 22
       },
       "height": "250px",
       "id": 36,
@@ -517,7 +839,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 14
+        "y": 22
       },
       "height": "250px",
       "id": 40,
@@ -630,7 +952,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 21
+        "y": 29
       },
       "height": "250px",
       "id": 63,
@@ -742,7 +1064,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 21
+        "y": 29
       },
       "id": 64,
       "legend": {
@@ -858,7 +1180,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 28
+        "y": 36
       },
       "id": 41,
       "legend": {
@@ -968,7 +1290,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 28
+        "y": 36
       },
       "height": "250px",
       "id": 62,
@@ -1078,6 +1400,7 @@
       "editable": true,
       "error": false,
       "fill": 2,
+      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1090,7 +1413,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 43
       },
       "height": "250px",
       "id": 37,
@@ -1112,7 +1435,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1134,6 +1459,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Assert Events",
       "tooltip": {
@@ -1172,7 +1498,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
@@ -1185,6 +1515,7 @@
       "editable": true,
       "error": false,
       "fill": 2,
+      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1197,7 +1528,7 @@
         "h": 7,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 43
       },
       "height": "250px",
       "id": 39,
@@ -1215,7 +1546,9 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "dataLinks": []
+      },
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1237,6 +1570,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Page Faults",
       "tooltip": {
@@ -1275,7 +1609,11 @@
           "min": null,
           "show": true
         }
-      ]
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
   "refresh": false,
@@ -1351,11 +1689,39 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "10.4.0.4:9216",
-          "value": "10.4.0.4:9216"
+          "tags": [],
+          "text": "bench",
+          "value": "bench"
         },
         "datasource": "Prometheus",
-        "definition": "",
+        "definition": "label_values(mongodb_mongod_connections, namespace)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "namespace",
+        "multi": false,
+        "multiFormat": "glob",
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(mongodb_mongod_connections, namespace)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": null,
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allFormat": "glob",
+        "allValue": null,
+        "current": {
+          "text": "10.82.99.78:9216",
+          "value": "10.82.99.78:9216"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(mongodb_mongod_connections{namespace=~\"$namespace\"}, instance)",
         "hide": 0,
         "includeAll": false,
         "label": "Instance",
@@ -1363,7 +1729,7 @@
         "multiFormat": "glob",
         "name": "host",
         "options": [],
-        "query": "label_values(mongodb_mongod_connections, instance)",
+        "query": "label_values(mongodb_mongod_connections{namespace=~\"$namespace\"}, instance)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1377,7 +1743,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
