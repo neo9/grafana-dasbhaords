@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 5270,
   "graphTooltip": 1,
-  "id": 20,
-  "iteration": 1576676165413,
+  "id": 34,
+  "iteration": 1578301502858,
   "links": [],
   "panels": [
     {
@@ -121,6 +121,7 @@
             "mean"
           ],
           "defaults": {
+            "decimals": 2,
             "mappings": [
               {
                 "id": 0,
@@ -130,7 +131,7 @@
                 "value": "null"
               }
             ],
-            "max": 100,
+            "max": 1,
             "min": 0,
             "nullValueMode": "connected",
             "thresholds": [
@@ -147,19 +148,19 @@
                 "value": 80
               }
             ],
-            "unit": "percent"
+            "unit": "percentunit"
           },
           "override": {},
           "values": false
         },
         "orientation": "horizontal",
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": false
       },
       "pluginVersion": "6.4.2",
       "targets": [
         {
-          "expr": "sum(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}) * 2  / sum(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"}) * 1000",
+          "expr": "sum(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}) / sum(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"})",
           "instant": true,
           "refId": "A"
         }
@@ -212,7 +213,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "mongodb_mongod_wiredtiger_cache_bytes_total{instance=\"$host\"}",
+          "expr": "mongodb_mongod_wiredtiger_cache_bytes_total{namespace=\"$namespace\"}",
+          "instant": false,
           "legendFormat": "{{ type }}",
           "refId": "A"
         }
@@ -323,7 +325,8 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}",
+          "expr": "mongodb_mongod_wiredtiger_cache_bytes{namespace=\"$namespace\", type=\"total\"}",
+          "instant": false,
           "refId": "A"
         }
       ],
@@ -340,7 +343,7 @@
           "value": "null"
         }
       ],
-      "valueName": "total"
+      "valueName": "current"
     },
     {
       "aliasColors": {},
@@ -1773,7 +1776,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "MongoDB Overview",
-  "uid": "LVwlTL1Wz",
-  "version": 1
+  "title": "MongoDB Overview test",
+  "uid": "jbvGQtLZz",
+  "version": 4
 }
