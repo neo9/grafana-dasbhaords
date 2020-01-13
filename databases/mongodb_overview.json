@@ -16,8 +16,7 @@
   "editable": true,
   "gnetId": 5270,
   "graphTooltip": 1,
-  "id": 34,
-  "iteration": 1578926083443,
+  "iteration": 1578926354041,
   "links": [],
   "panels": [
     {
@@ -113,7 +112,7 @@
         "x": 4,
         "y": 0
       },
-      "id": 72,
+      "id": 70,
       "links": [],
       "options": {
         "fieldOptions": {
@@ -185,7 +184,7 @@
         "x": 8,
         "y": 0
       },
-      "id": 68,
+      "id": 72,
       "legend": {
         "avg": false,
         "current": false,
@@ -284,7 +283,7 @@
         "x": 0,
         "y": 4
       },
-      "id": 70,
+      "id": 68,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -1403,7 +1402,6 @@
       "editable": true,
       "error": false,
       "fill": 2,
-      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1438,9 +1436,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1462,7 +1458,6 @@
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Assert Events",
       "tooltip": {
@@ -1501,11 +1496,7 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
@@ -1518,7 +1509,6 @@
       "editable": true,
       "error": false,
       "fill": 2,
-      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1549,9 +1539,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1573,7 +1561,6 @@
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Page Faults",
       "tooltip": {
@@ -1612,11 +1599,7 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     }
   ],
   "refresh": false,
@@ -1689,9 +1672,9 @@
         "type": "interval"
       },
       {
-        "allFormat": "glob",
         "allValue": null,
         "current": {
+          "tags": [],
           "text": "bench",
           "value": "bench"
         },
@@ -1701,7 +1684,6 @@
         "includeAll": false,
         "label": "namespace",
         "multi": false,
-        "multiFormat": "glob",
         "name": "namespace",
         "options": [],
         "query": "label_values(mongodb_mongod_connections, namespace)",
@@ -1709,7 +1691,7 @@
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": null,
+        "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
         "type": "query",
@@ -1745,7 +1727,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -1776,6 +1758,6 @@
   },
   "timezone": "browser",
   "title": "MongoDB Overview",
-  "uid": "jbvGQtLZz",
-  "version": 3
+  "uid": "LVwlTL1Wz",
+  "version": 1
 }
