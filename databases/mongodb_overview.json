@@ -16,8 +16,7 @@
   "editable": true,
   "gnetId": 5270,
   "graphTooltip": 1,
-  "id": 20,
-  "iteration": 1576676165413,
+  "iteration": 1578926354041,
   "links": [],
   "panels": [
     {
@@ -113,7 +112,7 @@
         "x": 4,
         "y": 0
       },
-      "id": 72,
+      "id": 70,
       "links": [],
       "options": {
         "fieldOptions": {
@@ -121,6 +120,7 @@
             "mean"
           ],
           "defaults": {
+            "decimals": 2,
             "mappings": [
               {
                 "id": 0,
@@ -130,7 +130,7 @@
                 "value": "null"
               }
             ],
-            "max": 100,
+            "max": 1,
             "min": 0,
             "nullValueMode": "connected",
             "thresholds": [
@@ -147,19 +147,19 @@
                 "value": 80
               }
             ],
-            "unit": "percent"
+            "unit": "percentunit"
           },
           "override": {},
           "values": false
         },
         "orientation": "horizontal",
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": false
       },
       "pluginVersion": "6.4.2",
       "targets": [
         {
-          "expr": "sum(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}) * 2  / sum(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"}) * 1000",
+          "expr": "sum(mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}) / sum(mongodb_mongod_wiredtiger_cache_max_bytes{instance=\"$host\"})",
           "instant": true,
           "refId": "A"
         }
@@ -184,7 +184,7 @@
         "x": 8,
         "y": 0
       },
-      "id": 68,
+      "id": 72,
       "legend": {
         "avg": false,
         "current": false,
@@ -213,6 +213,7 @@
       "targets": [
         {
           "expr": "mongodb_mongod_wiredtiger_cache_bytes_total{instance=\"$host\"}",
+          "instant": false,
           "legendFormat": "{{ type }}",
           "refId": "A"
         }
@@ -282,7 +283,7 @@
         "x": 0,
         "y": 4
       },
-      "id": 70,
+      "id": 68,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -324,6 +325,7 @@
       "targets": [
         {
           "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}",
+          "instant": false,
           "refId": "A"
         }
       ],
@@ -340,7 +342,7 @@
           "value": "null"
         }
       ],
-      "valueName": "total"
+      "valueName": "current"
     },
     {
       "aliasColors": {},
@@ -1400,7 +1402,6 @@
       "editable": true,
       "error": false,
       "fill": 2,
-      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1435,9 +1436,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1459,7 +1458,6 @@
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Assert Events",
       "tooltip": {
@@ -1498,11 +1496,7 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     },
     {
       "aliasColors": {},
@@ -1515,7 +1509,6 @@
       "editable": true,
       "error": false,
       "fill": 2,
-      "fillGradient": 0,
       "grid": {
         "leftLogBase": 1,
         "leftMax": null,
@@ -1546,9 +1539,7 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -1570,7 +1561,6 @@
       ],
       "thresholds": [],
       "timeFrom": null,
-      "timeRegions": [],
       "timeShift": null,
       "title": "Page Faults",
       "tooltip": {
@@ -1609,11 +1599,7 @@
           "min": null,
           "show": true
         }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      ]
     }
   ],
   "refresh": false,
@@ -1686,7 +1672,6 @@
         "type": "interval"
       },
       {
-        "allFormat": "glob",
         "allValue": null,
         "current": {
           "tags": [],
@@ -1699,7 +1684,6 @@
         "includeAll": false,
         "label": "namespace",
         "multi": false,
-        "multiFormat": "glob",
         "name": "namespace",
         "options": [],
         "query": "label_values(mongodb_mongod_connections, namespace)",
@@ -1707,7 +1691,7 @@
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
-        "tagValuesQuery": null,
+        "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
         "type": "query",
@@ -1743,7 +1727,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
