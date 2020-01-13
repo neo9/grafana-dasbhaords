@@ -17,7 +17,7 @@
   "gnetId": 5270,
   "graphTooltip": 1,
   "id": 34,
-  "iteration": 1578301502858,
+  "iteration": 1578926083443,
   "links": [],
   "panels": [
     {
@@ -213,7 +213,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "mongodb_mongod_wiredtiger_cache_bytes_total{namespace=\"$namespace\"}",
+          "expr": "mongodb_mongod_wiredtiger_cache_bytes_total{instance=\"$host\"}",
           "instant": false,
           "legendFormat": "{{ type }}",
           "refId": "A"
@@ -325,7 +325,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "mongodb_mongod_wiredtiger_cache_bytes{namespace=\"$namespace\", type=\"total\"}",
+          "expr": "mongodb_mongod_wiredtiger_cache_bytes{instance=\"$host\", type=\"total\"}",
           "instant": false,
           "refId": "A"
         }
@@ -1692,7 +1692,6 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "bench",
           "value": "bench"
         },
@@ -1776,7 +1775,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "MongoDB Overview test",
+  "title": "MongoDB Overview",
   "uid": "jbvGQtLZz",
-  "version": 4
+  "version": 3
 }
