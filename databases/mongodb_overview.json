@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": 5270,
   "graphTooltip": 1,
-  "iteration": 1578926354041,
+  "iteration": 1579005159545,
   "links": [],
   "panels": [
     {
@@ -402,7 +402,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(mongodb_mongod_op_counters_total{instance=\"$host\", type!=\"command\"}[$interval]) or irate(mongodb_mongod_op_counters_total{instance=\"$host\", type!=\"command\"}[5m])",
+          "expr": "rate(mongodb_mongod_op_counters_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_op_counters_total{instance=\"$host\"}[5m])",
           "hide": false,
           "interval": "$interval",
           "intervalFactor": 1,
@@ -411,7 +411,7 @@
           "step": 300
         },
         {
-          "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type!~\"(command|query|getmore)\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\", type!~\"(command|query|getmore)\"}[5m])",
+          "expr": "rate(mongodb_mongod_op_counters_repl_total{instance=\"$host\"}[$interval]) or irate(mongodb_mongod_op_counters_repl_total{instance=\"$host\"}[5m])",
           "hide": false,
           "interval": "$interval",
           "intervalFactor": 1,
@@ -1674,7 +1674,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "bench",
           "value": "bench"
         },
