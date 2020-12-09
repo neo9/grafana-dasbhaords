@@ -133,7 +133,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "min(thanos_objstore_bucket_last_successful_upload_time{job=\"thanos-sidecar\",instance=~\"$instance\"})*1000",
+          "expr": "min(thanos_objstore_bucket_last_successful_upload_time{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"})*1000",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -215,7 +215,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "min(thanos_sidecar_last_heartbeat_success_time_seconds{job=\"thanos-sidecar\",instance=~\"$instance\"})*1000",
+          "expr": "min(thanos_sidecar_last_heartbeat_success_time_seconds{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"})*1000",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -279,7 +279,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(grpc_server_handled_total{job=\"thanos-sidecar\",instance=~\"$instance\"}[$interval])) by (grpc_code, grpc_method, instance)",
+          "expr": "sum(rate(grpc_server_handled_total{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"}[$interval])) by (grpc_code, grpc_method, instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{grpc_code}} {{grpc_method}}  {{instance}}",
@@ -368,7 +368,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(grpc_server_handling_seconds_bucket{job=\"thanos-sidecar\"}[$interval])) by (grpc_method, le, instance))",
+          "expr": "histogram_quantile(0.9999, sum(rate(grpc_server_handling_seconds_bucket{job=~\".*thanos-sidecar.*\"}[$interval])) by (grpc_method, le, instance))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "99.99 {{grpc_method}} {{instance}}",
@@ -457,7 +457,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=\"thanos-sidecar\",instance=~\"$instance\"}[$interval])) by (instance, operation)",
+          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"}[$interval])) by (instance, operation)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{operation}} {{instance}}",
@@ -546,7 +546,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=\"thanos-sidecar\",instance=~\"$instance\"}[$interval])) by (operation,instance)",
+          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"}[$interval])) by (operation,instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{operation}} {{instance}}",
@@ -635,7 +635,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=\"thanos-sidecar\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -733,7 +733,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_heap_alloc_bytes{job=\"thanos-sidecar\",instance=~\"$instance\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}}",
@@ -815,7 +815,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{job=\"thanos-sidecar\",instance=~\"$instance\"}",
+          "expr": "go_goroutines{job=~\".*thanos-sidecar.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}}",
@@ -900,7 +900,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds{job=\"thanos-sidecar\", quantile=\"1\"}",
+          "expr": "go_gc_duration_seconds{job=~\".*thanos-sidecar.*\", quantile=\"1\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{quantile}} {{instance}} {{instance}}",
@@ -1055,7 +1055,7 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(grpc_server_handled_total{job=\"thanos-sidecar\"}, instance)",
+        "query": "label_values(grpc_server_handled_total{job=~\".*thanos-sidecar.*\"}, instance)",
         "refresh": 1,
         "regex": "",
         "sort": 0,

@@ -108,35 +108,35 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(prometheus_tsdb_compactions_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(prometheus_tsdb_compactions_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "compaction {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "bucket ops {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(thanos_compact_garbage_collection_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_compact_garbage_collection_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "gc ops  {{instance}}",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(thanos_compact_group_compactions_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_compact_group_compactions_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "group compact  {{instance}}",
           "refId": "D"
         },
         {
-          "expr": "sum(rate(thanos_compact_sync_meta_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_compact_sync_meta_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sync metas  {{instance}}",
@@ -225,35 +225,35 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(prometheus_tsdb_compactions_failed_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(prometheus_tsdb_compactions_failed_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "compaction {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "bucket ops {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(thanos_compact_garbage_collection_failures_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_compact_garbage_collection_failures_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "gc ops  {{instance}}",
           "refId": "C"
         },
         {
-          "expr": "sum(rate(thanos_compact_group_compactions_failures_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_compact_group_compactions_failures_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "group compact  {{instance}}",
           "refId": "D"
         },
         {
-          "expr": "sum(rate(thanos_compact_sync_meta_failures_total{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_compact_sync_meta_failures_total{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "sync metas  {{instance}}",
@@ -342,7 +342,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_compact_garbage_collection_duration_seconds_bucket{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_compact_garbage_collection_duration_seconds_bucket{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -351,14 +351,14 @@
           "step": 2
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_compact_sync_meta_duration_seconds_bucket{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_compact_sync_meta_duration_seconds_bucket{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "99.99 sync meta  {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -366,7 +366,7 @@
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(prometheus_tsdb_compaction_duration_seconds_bucket{job=\"thanos-compactor\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(prometheus_tsdb_compaction_duration_seconds_bucket{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "99.99 compact {{instance}}",
@@ -463,7 +463,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_heap_alloc_bytes{job=\"thanos-compactor\",instance=~\"$instance\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}}",
@@ -545,7 +545,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{job=\"thanos-compactor\",instance=~\"$instance\"}",
+          "expr": "go_goroutines{job=~\".*thanos-compactor.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}}",
@@ -628,7 +628,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds{job=\"thanos-compactor\", quantile=\"1\"}",
+          "expr": "go_gc_duration_seconds{job=~\".*thanos-compactor.*\", quantile=\"1\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}} ",
@@ -777,7 +777,7 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(thanos_compact_garbage_collection_total{job=\"thanos-compactor\"}, instance)",
+        "query": "label_values(thanos_compact_garbage_collection_total{job=~\".*thanos-compactor.*\"}, instance)",
         "refresh": 1,
         "regex": "",
         "sort": 0,

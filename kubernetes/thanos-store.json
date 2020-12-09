@@ -108,7 +108,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(grpc_server_handled_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (grpc_code, grpc_method, instance)",
+          "expr": "sum(rate(grpc_server_handled_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (grpc_code, grpc_method, instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{grpc_code}} {{grpc_method}}  {{instance}}",
@@ -197,7 +197,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(grpc_server_handling_seconds_bucket{job=\"thanos-store\"}[$interval])) by (grpc_method, le, instance))",
+          "expr": "histogram_quantile(0.9999, sum(rate(grpc_server_handling_seconds_bucket{job=~\".*thanos-store.*\"}[$interval])) by (grpc_method, le, instance))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{grpc_method}} {{instance}}",
@@ -286,7 +286,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_sent_chunk_size_bytes_bucket{job=\"thanos-store\"}[$interval])) by (le, instance))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_sent_chunk_size_bytes_bucket{job=~\".*thanos-store.*\"}[$interval])) by (le, instance))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{instance}}",
@@ -375,21 +375,21 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance, operation)",
+          "expr": "sum(rate(thanos_objstore_bucket_operations_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance, operation)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "bucket {{operation}} {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_drops_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_bucket_store_block_drops_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "block drops {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_loads_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_bucket_store_block_loads_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "block loads {{instance}}",
@@ -478,21 +478,21 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (operation,instance)",
+          "expr": "sum(rate(thanos_objstore_bucket_operation_failures_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (operation,instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "bucket {{operation}} {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_drop_failures_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_bucket_store_block_drop_failures_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "block drop {{instance}}",
           "refId": "B"
         },
         {
-          "expr": "sum(rate(thanos_bucket_store_block_load_failures_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance)",
+          "expr": "sum(rate(thanos_bucket_store_block_load_failures_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "block load {{instance}}",
@@ -581,7 +581,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,le, operation))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_objstore_bucket_operation_duration_seconds_bucket{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance,le, operation))",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -589,14 +589,14 @@
           "refId": "C"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_get_all_duration_seconds_bucket{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_get_all_duration_seconds_bucket{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "99.99 get all {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_merge_duration_seconds_bucket{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_bucket_store_series_merge_duration_seconds_bucket{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance,le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "99.99 merge {{instance}}",
@@ -684,28 +684,28 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(thanos_store_index_cache_items_added_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_items_added_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "added {{item_type}} {{instance}}",
           "refId": "D"
         },
         {
-          "expr": "sum(rate(thanos_store_index_cache_items_evicted_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_items_evicted_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "evicted {{item_type}} {{instance}}",
           "refId": "E"
         },
         {
-          "expr": "sum(rate(thanos_store_index_cache_requests_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_requests_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance,item_type)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "requests {{item_type}} {{instance}}",
           "refId": "F"
         },
         {
-          "expr": "sum(rate(thanos_store_index_cache_hits_total{job=\"thanos-store\",instance=~\"$instance\"}[$interval])) by (instance, item_type)",
+          "expr": "sum(rate(thanos_store_index_cache_hits_total{job=~\".*thanos-store.*\",instance=~\"$instance\"}[$interval])) by (instance, item_type)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "hits {{item_type}} {{instance}}",
@@ -794,7 +794,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "thanos_bucket_store_series_blocks_queried{job=\"thanos-store\",quantile=\"0.99\",instance=~\"$instance\"}",
+          "expr": "thanos_bucket_store_series_blocks_queried{job=~\".*thanos-store.*\",quantile=\"0.99\",instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 2,
@@ -802,14 +802,14 @@
           "refId": "C"
         },
         {
-          "expr": "thanos_bucket_store_series_data_fetched{job=\"thanos-store\",quantile=\"0.99\",instance=~\"$instance\"}",
+          "expr": "thanos_bucket_store_series_data_fetched{job=~\".*thanos-store.*\",quantile=\"0.99\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "data fetched {{instance}} {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "thanos_bucket_store_series_result_series{job=\"thanos-store\",quantile=\"0.99\",instance=~\"$instance\"}",
+          "expr": "thanos_bucket_store_series_result_series{job=~\".*thanos-store.*\",quantile=\"0.99\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "result series {{instance}} {{instance}}",
@@ -906,7 +906,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_heap_alloc_bytes{job=\"thanos-store\",instance=~\"$instance\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=~\".*thanos-store.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}}",
@@ -988,7 +988,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{job=\"thanos-store\",instance=~\"$instance\"}",
+          "expr": "go_goroutines{job=~\".*thanos-store.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}}",
@@ -1071,7 +1071,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds{job=\"thanos-store\", quantile=\"1\"}",
+          "expr": "go_gc_duration_seconds{job=~\".*thanos-store.*\", quantile=\"1\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}} {{instance}} ",
@@ -1220,7 +1220,7 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(grpc_server_handled_total{job=\"thanos-store\"}, instance)",
+        "query": "label_values(grpc_server_handled_total{job=~\".*thanos-store.*\"}, instance)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
