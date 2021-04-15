@@ -114,7 +114,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(grpc_client_handled_total{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (instance, grpc_code, grpc_method)",
+          "expr": "sum(rate(grpc_client_handled_total{job=~\".*thanos-quer.*\",instance=~\"$instance\"}[$interval])) by (instance, grpc_code, grpc_method)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{grpc_code}} {{grpc_method}} {{instance}}",
@@ -203,7 +203,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(grpc_client_handling_seconds_bucket{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (grpc_method,instance, le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(grpc_client_handling_seconds_bucket{job=~\".*thanos-quer.*\",instance=~\"$instance\"}[$interval])) by (grpc_method,instance, le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "99.99 {{grpc_method}} {{instance}}",
@@ -292,14 +292,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_instant_query_duration_seconds_bucket{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (instance, le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_instant_query_duration_seconds_bucket{job=~\".*thanos-quer.*\",instance=~\"$instance\"}[$interval])) by (instance, le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "instant_query {{instance}}",
           "refId": "A"
         },
         {
-          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_range_query_duration_seconds_bucket{job=\"thanos-query\",instance=~\"$instance\"}[$interval])) by (instance, le))",
+          "expr": "histogram_quantile(0.9999, sum(rate(thanos_query_api_range_query_duration_seconds_bucket{job=~\".*thanos-quer.*\",instance=~\"$instance\"}[$interval])) by (instance, le))",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "range_query {{instance}}",
@@ -382,7 +382,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "prometheus_engine_query_duration_seconds{job=\"thanos-query\",instance=~\"$instance\",quantile=\"0.99\"}",
+          "expr": "prometheus_engine_query_duration_seconds{job=~\".*thanos-quer.*\",instance=~\"$instance\",quantile=\"0.99\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{instance}} {{slice}}",
@@ -464,7 +464,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "prometheus_engine_queries{job=\"thanos-query\",instance=~\"$instance\"}",
+          "expr": "prometheus_engine_queries{job=~\".*thanos-quer.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -576,7 +576,7 @@
       ],
       "targets": [
         {
-          "expr": "min(thanos_store_node_info{job=\"thanos-query\"}) by (external_labels)",
+          "expr": "min(thanos_store_node_info{job=~\".*thanos-quer.*\"}) by (external_labels)",
           "format": "table",
           "instant": true,
           "interval": "",
@@ -643,7 +643,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_memstats_heap_alloc_bytes{job=\"thanos-query\",instance=~\"$instance\"}",
+          "expr": "go_memstats_heap_alloc_bytes{job=~\".*thanos-quer.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}}",
@@ -725,7 +725,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_goroutines{job=\"thanos-query\"}",
+          "expr": "go_goroutines{job=~\".*thanos-quer.*\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{instance}}",
@@ -810,7 +810,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "go_gc_duration_seconds{job=\"thanos-query\",instance=~\"$instance\"}",
+          "expr": "go_gc_duration_seconds{job=~\".*thanos-quer.*\",instance=~\"$instance\"}",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{quantile}} {{instance}}",
@@ -959,7 +959,7 @@
         "multi": false,
         "name": "instance",
         "options": [],
-        "query": "label_values(thanos_build_info{job=\"thanos-query\"}, instance)",
+        "query": "label_values(thanos_build_info{job=~\".*thanos-quer.*\"}, instance)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
